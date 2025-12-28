@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>RAAYA WEAR - Premium Rental</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#ff4d88;--indigo:#0f0c29;--cream:#fdfbf7;--dark:#1a1a1a;--gold:#d4af37;--neon:#00f2ea}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+header{position:fixed;inset:0 0 auto 0;height:70px;z-index:100;padding:0 5%;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Bodoni Moda',serif;font-size:1.6rem;font-weight:700;color:#000;letter-spacing:-1px}
+nav{display:none;gap:25px;font-weight:500;font-size:.9rem}
+@media(min-width:768px){nav{display:flex}}
+nav a{text-decoration:none;color:#000;transition:.3s;text-transform:uppercase;font-size:0.85rem;letter-spacing:1px}
+nav a:hover{color:var(--rose)}
+.mobile-nav{display:flex;flex-direction:row;align-items:center;gap:10px;flex-wrap:nowrap}
+.mobile-nav button{display:flex;align-items:center;justify-content:center;width:22px;height:22px}
+@media(min-width:768px){.mobile-nav{display:none}}
+.cart-btn{background:none;border:none;cursor:pointer;position:relative}
+.cart-btn svg{width:22px;fill:#000}
+.cnt{position:absolute;top:-5px;right:-8px;background:var(--rose);color:#fff;font-size:10px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.desktop-cart{display:none}
+@media(min-width:768px){.desktop-cart{display:block}}
+.mobile-menu{position:fixed;top:70px;right:-100%;width:250px;height:calc(100vh - 70px);background:#fff;box-shadow:-2px 0 10px rgba(0,0,0,0.1);transition:.3s;z-index:99;padding:2rem}
+.mobile-menu.active{right:0}
+.mobile-menu a{display:block;padding:1rem 0;color:#000;text-decoration:none;border-bottom:1px solid #eee;text-transform:uppercase;font-size:0.9rem;letter-spacing:1px}
+footer{background:#fff;color:#000;padding:3rem 5%;text-align:center;font-size:0.85rem;border-top:1px solid #eee;letter-spacing:1px}
+section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:80px 5%}
+h2{font-family:'Bodoni Moda',serif;font-size:clamp(2.5rem,6vw,3.5rem);margin-bottom:1rem;color:var(--dark);line-height:1.1}
+p{font-size:1rem;color:#555;max-width:600px;line-height:1.6;margin-bottom:2rem}
+.reveal{opacity:0;transform:translateY(40px);transition:0.8s cubic-bezier(.2,1,.3,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.btn{padding:1rem 2.5rem;border:1px solid currentColor;background:transparent;font-weight:600;cursor:pointer;transition:.3s;font-family:'Jost',sans-serif;letter-spacing:2px;text-transform:uppercase;color:inherit}
+.btn:hover{background:#000;color:#fff;border-color:#000}
+#hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 25%,#0f3460 50%,#533483 75%,#e94560 100%);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="p" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23p)"/></svg>');opacity:0.3}
+.hero-t{font-size:clamp(3.5rem,11vw,7rem);line-height:0.9;color:#ffffff;margin-bottom:1.5rem;font-weight:700;position:relative;z-index:2}
+#hero p{color:rgba(255,255,255,0.9);position:relative;z-index:2}
+#hero .btn{color:#fff;border-color:#fff;position:relative;z-index:2}
+#about{background:#fff}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;width:100%;max-width:1100px;margin-top:2rem}
+.feat{padding:1.5rem;border:1px solid #f0f0f0;border-radius:10px;transition:.3s;display:flex;flex-direction:column;align-items:center}
+.feat:hover{border-color:var(--rose);transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.05)}
+.f-icon{font-size:2.5rem;margin-bottom:15px}
+.feat h3{font-size:0.9rem;letter-spacing:1px;margin-bottom:5px}
+.feat p{font-size:0.8rem;margin:0;color:#777}
+
+/* CATEGORY SECTION STYLES - CONTROL BACKGROUND OVERLAY HERE */
+.cat-sec{background-size:cover;background-position:center;color:#fff;position:relative}
+.cat-sec::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    /* CHANGE THIS VALUE TO ADJUST BACKGROUND DARKNESS */
+    /* 0 = fully transparent, 1 = fully dark */
+    background:rgba(0,0,0,0);  /* Currently set to 0 (no overlay) */
+    z-index:1;
+}
+.cat-content{
+    position:relative;
+    z-index:2;
+    border:1px solid rgba(255,255,255,0.5);
+    padding:3rem;
+    /* CHANGE THIS VALUE TO ADJUST TEXT BOX BLUR */
+    /* Higher values = more blur behind the text box */
+    backdrop-filter:blur(0px);  /* Currently set to 0px (no blur) */
+    /* CHANGE THIS VALUE TO ADJUST TEXT BOX BACKGROUND OPACITY */
+    background:rgba(0,0,0,0);  /* Currently set to 0 (fully transparent) */
+    max-width:600px;
+}
+.cat-sec h2,.cat-sec p{color:#fff}
+.cat-btn{padding:.8rem 2rem;border:1px solid #fff;background:transparent;color:#fff;font-weight:600;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:.3s;margin-top:1rem}
+.cat-btn:hover{background:#fff;color:var(--dark)}
+
+#collection{background:linear-gradient(135deg,#2a1a3e,#302b63,#24243e);color:#fff;padding:80px 0}
+#collection h2{color:#fff;font-size:clamp(2rem,5vw,3rem)}
+#collection p{color:rgba(255,255,255,0.7)}
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:3rem;z-index:10}
+.f-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);padding:8px 20px;border-radius:30px;cursor:pointer;font-size:0.8rem;transition:.3s;letter-spacing:1px;text-transform:uppercase}
+.f-btn.active,.f-btn:hover{background:#fff;color:#000;border-color:#fff}
+.scene{width:100%;max-width:320px;height:440px;perspective:1000px;margin:0 auto;position:relative}
+.carousel{width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.7s cubic-bezier(.2,1,.3,1)}
+
+/* PRODUCT CARD BLUR SETTINGS - MODIFY HERE */
+.plate{
+    position:absolute;
+    width:260px;
+    height:380px;
+    left:50%;
+    top:50%;
+    margin-left:-130px;
+    margin-top:-190px;
+    background:rgba(255,255,255,0.95);
+    border-radius:4px;
+    box-shadow:inset 3px 0 10px rgba(0,0,0,0.1),0 15px 40px rgba(0,0,0,0.4);
+    display:flex;
+    flex-direction:column;
+    padding:15px;
+    text-align:center;
+    transition:opacity 0.4s,filter 0.4s;
+    backface-visibility:hidden;
+    color:#000;
+}
+.plate.blur{
+    /* CHANGE THESE VALUES TO ADJUST NON-ACTIVE CARD APPEARANCE */
+    opacity:1;  /* Changed from 0.25 to 1 (fully visible) */
+    pointer-events:none;
+    filter:blur(0px);  /* Changed from blur(2px) to blur(0px) (no blur) */
+}
+@media(max-width:767px){
+    .plate.blur{
+        filter:none;
+        opacity:1;
+    }
+}
+
+.p-img{flex:1;background:#f5f5f5;margin-bottom:12px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:2px}
+.p-img img{width:100%;height:100%;object-fit:cover}
+.p-info h3{font-family:'Bodoni Moda';font-size:1.2rem;margin-bottom:4px}
+.p-price{font-size:0.95rem;margin-bottom:10px;color:#555;font-weight:500}
+.p-old{text-decoration:line-through;opacity:0.6;margin-right:8px;font-size:0.85rem;color:#8b0000}
+.add-btn{width:100%;padding:10px;background:#000;border:none;color:#fff;font-weight:600;cursor:pointer;font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;transition:0.2s}
+.add-btn:hover{background:var(--rose)}
+.navs{display:flex;gap:20px;justify-content:center;margin-top:30px}
+.n-btn{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;cursor:pointer;font-size:1.2rem;transition:.2s}
+.n-btn:hover{background:#fff;color:#000}
+#contact{background:linear-gradient(135deg,#f0e6f6 0%,#e8f4f8 50%,#fef9f3 100%)}
+.c-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;max-width:800px;margin:2rem auto 0}
+@media(max-width:767px){.c-grid{grid-template-columns:repeat(2,1fr)}}
+.c-link{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--dark);padding:2rem 1rem;background:rgba(255,255,255,0.8);border-radius:10px;transition:.3s}
+.c-link:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(255,107,157,.15)}
+.c-icon{width:40px;height:40px;fill:var(--rose);margin-bottom:.8rem}
+.c-label{font-size:.9rem;font-weight:600}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;transition:opacity 0.3s,visibility 0.3s}
+.modal.active{visibility:visible;opacity:1}
+.m-box{background:#fff;width:100%;max-width:450px;max-height:80vh;overflow-y:auto;padding:2rem;position:relative;border-radius:20px;transform:translateY(50px);transition:transform 0.3s}
+.modal.active .m-box{transform:translateY(0)}
+.close{position:absolute;top:15px;right:15px;font-size:1.5rem;background:none;border:none;cursor:pointer}
+.cart-item{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0;font-size:0.9rem}
+.q-btn{width:24px;height:24px;background:#eee;border:none;border-radius:50%;cursor:pointer}
+@media(max-width:767px){
+.cat-sec{background-image:var(--mobile-bg)!important}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">RAAYA</div>
+<nav><a href="#hero">Home</a><a href="#about">Manifesto</a><a href="#collection">Collection</a><a href="#contact">Contact</a></nav>
+<div class="desktop-cart">
+<button class="cart-btn" onclick="tCart()"><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg><div class="cnt">0</div></button>
+</div>
+<div class="mobile-nav">
+<button id="menu-btn" onclick="tMenu()"><svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></button>
+<button id="cart-btn" onclick="tCart()"><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg><div id="cnt">0</div></button>
+</div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+<a href="#hero" onclick="tMenu()">Home</a>
+<a href="#about" onclick="tMenu()">Manifesto</a>
+<a href="#collection" onclick="tMenu()">Collection</a>
+<a href="#contact" onclick="tMenu()">Contact</a>
+</div>
+<main>
+<section id="hero" class="reveal">
+<h1 class="hero-t">RENT<br>YOUR<br>VIBE</h1>
+<p>Sustainable rental clothing for the digital generation.</p>
+<button class="btn" onclick="jumpToCat('Evening')">Start Exploring</button>
+</section>
+<section id="about" class="reveal">
+<h2>MANIFESTO</h2>
+<div class="feat-grid">
+<div class="feat"><div class="f-icon">♻️</div><h3>CIRCULAR</h3><p>Own the look, not the garment.</p></div>
+<div class="feat"><div class="f-icon">✨</div><h3>PREMIUM</h3><p>Curated global designer pieces.</p></div>
+<div class="feat"><div class="f-icon">🕒</div><h3>FLEXIBLE</h3><p>Rent for 3, 5, or 7 days.</p></div>
+<div class="feat"><div class="f-icon">💰</div><h3>AFFORDABLE</h3><p>Luxury at a fraction of the cost.</p></div>
+<div class="feat"><div class="f-icon">🌱</div><h3>SUSTAINABLE</h3><p>Reduce waste, elevate style.</p></div>
+<div class="feat"><div class="f-icon">🚚</div><h3>DELIVERED</h3><p>Free doorstep delivery & pickup.</p></div>
+</div>
+</section>
+<div id="cats-container"></div>
+<section id="collection" class="reveal">
+<h2>Our Bespoke & Luxe Collections</h2>
+<p>Handpicked pieces for every moment.</p>
+<div class="filters" id="filters"></div>
+<div class="scene"><div class="carousel" id="carousel"></div></div>
+<div class="navs">
+<button class="n-btn" onclick="rot(1)">◀</button>
+<button class="n-btn" onclick="rot(-1)">▶</button>
+</div>
+</section>
+<section id="contact" class="reveal">
+<h2>CONNECT</h2>
+<div class="c-grid">
+<a href="mailto:hello@raayawear.com" class="c-link">
+<svg class="c-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+<span class="c-label">Email</span>
+</a>
+<a href="https://wa.me/919876543210" target="_blank" class="c-link">
+<svg class="c-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+<span class="c-label">WhatsApp</span>
+</a>
+<a href="https://instagram.com/raayawear" target="_blank" class="c-link">
+<svg class="c-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+<span class="c-label">Instagram</span>
+</a>
+<a href="tel:+919876543210" class="c-link">
+<svg class="c-icon" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+<span class="c-label">Phone</span>
+</a>
+</div>
+</section>
+</main>
+<footer>© 2025 RAAYA WEAR. All rights reserved.</footer>
+<div id="cart-m" class="modal" onclick="if(event.target===this)cCart()"><div class="m-box"><button class="close" onclick="cCart()">&times;</button><h3>YOUR CART</h3><div id="c-items"></div><button class="btn" style="width:100%;margin-top:20px;background:#000;color:#fff;border:none" onclick="chk()">CHECKOUT</button></div></div>
+<script>
+const cats=['Evening','Street','Business','Vacation','Festival','Traditional','Party','Casual'];
+const icons={'Evening':'👗','Street':'🧥','Business':'👔','Vacation':'🌴','Festival':'🎪','Traditional':'🥻','Party':'💃','Casual':'👖'};
+const bgDesktop=['https://images.unsplash.com/photo-1765229277058-177cd0dead2c?q=80&w=1171&auto=format&fit=crop','https://plus.unsplash.com/premium_photo-1661490539760-d884de4a4aea?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','https://plus.unsplash.com/premium_photo-1661438119642-7d639a1ac935?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','https://plus.unsplash.com/premium_photo-1661265859579-de8150e43edb?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','https://images.pexels.com/photos/8887292/pexels-photo-8887292.jpeg','https://images.pexels.com/photos/13661845/pexels-photo-13661845.jpeg','https://images.unsplash.com/photo-1649730837323-a6e68ce1b62e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','https://images.unsplash.com/photo-1760551600711-46929ae2f857?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'];
+const bgMobile=['https://plus.unsplash.com/premium_photo-1683147855850-c83383f5df24?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1604327538461-f825e0c56b8b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','https://images.unsplash.com/photo-1622497170185-5d668f816a56?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=600&auto=format&fit=crop','https://plus.unsplash.com/premium_photo-1682090792229-4e488ab5c43a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGluZGlhbiUyMGZlc3RpdmFsJTIwY2xvdGhpbmd8ZW58MHwxfDB8fHww','https://images.unsplash.com/photo-1678705730064-a7ecbab4b3fb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','https://images.unsplash.com/photo-1765229279773-b10038a84425?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1604004382251-3d44b83d2903?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FzdWFsJTIwZmFzaGlvbnxlbnwwfDF8MHx8fDA%3D'];
+const taglines={'Evening':'Glamorous pieces for nights you\'ll never forget','Street':'Urban edge meets comfort for everyday flex','Business':'Power dressing for the modern professional','Vacation':'Breezy pieces for your next adventure','Festival':'Bold, vibrant looks for music festival season','Traditional':'Timeless elegance meets modern grace','Party':'Statement pieces for unforgettable celebrations','Casual':'Effortless style for everyday chic'};
+const productImgs={
+'Evening':['https://images.unsplash.com/photo-1717674798009-1ddf82a9dedc?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1717674796525-23119eb51e2d?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1698347327032-b06446755f6a?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1648134891225-1778502b7d34?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1634727035168-350a09dc22c1?w=600&auto=format&fit=crop'],
+'Street':['https://plus.unsplash.com/premium_photo-1681494700976-861938fe0513?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1609535766106-0864edad28e4?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1532332248682-206cc786359f?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1613053342567-924891457d16?w=600&auto=format&fit=crop'],
+'Business':['https://images.unsplash.com/photo-1692096674852-0df619f6fdc3?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1598032896220-028b9c06e163?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1624835589323-442670703bc0?w=600&auto=format&fit=crop','https://plus.unsplash.com/premium_photo-1683133535764-ca81e9fb0b48?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1614786269829-d24616faf56d?w=600&auto=format&fit=crop'],
+'Vacation':['https://images.unsplash.com/photo-1662864947687-b908bdd57a46?w=600&auto=format&fit=crop','https://plus.unsplash.com/premium_photo-1658526845943-28e111c70cfd?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1586024421970-2a3544e06eb7?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1758636663292-6b5f98c653f7?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1707765643763-aa1f4d3da740?w=600&auto=format&fit=crop'],
+'Festival':['https://plus.unsplash.com/premium_photo-1682090784102-b5e9fc3fb3bb?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1756483557756-1b40cb0421f0?w=600&auto=format&fit=crop','https://plus.unsplash.com/premium_photo-1682096128630-c5ec99af10f3?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1574847872646-abff244bbd87?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1610202344337-8c50fc78e0b1?w=600&auto=format&fit=crop'],
+'Traditional':['https://images.unsplash.com/photo-1641382158662-b6ef03d53f53?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1731135620457-40938092c754?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1674729445183-15fd4f5e2a87?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1717342586432-3fb4c5bd39c1?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1727835523550-18478cacefa2?w=600&auto=format&fit=crop'],
+'Party':['https://plus.unsplash.com/premium_photo-1673792686413-2ea78990fb75?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1765229280258-4bbf10b879d8?w=600&auto=format&fit=crop','https://plus.unsplash.com/premium_photo-1760466051058-28c31828ade7?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1719426212535-e5099024fa3b?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1718141702078-f44584a85a88?w=600&auto=format&fit=crop'],
+'Casual':['https://images.unsplash.com/photo-1766193229953-18ec97885584?w=600&auto=format&fit=crop','https://plus.unsplash.com/premium_photo-1719306280448-1e012d998bbd?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1618374889392-7bd8f8aa0dde?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1632900820454-84def8102f52?w=600&auto=format&fit=crop','https://images.unsplash.com/photo-1656243249561-93d720621ce7?q=80&w=686&auto=format&fit=crop']
+};
+const db=[];
+cats.forEach((c,i)=>{for(let j=1;j<=5;j++)db.push({id:i*10+j,name:`${c} Look ${j}`,cat:c,price:2000+Math.floor(Math.random()*6000),old:8500,icon:icons[c],img:productImgs[c][j-1]})});
+const cont=document.getElementById('cats-container');
+cats.forEach((c,i)=>{
+const s=document.createElement('section');
+s.className='cat-sec reveal';
+s.style.backgroundImage=`url('${bgDesktop[i]}')`;
+if(c === 'Vacation' || c === 'Street') s.style.backgroundSize = 'cover';
+s.style.setProperty('--mobile-bg',`url('${bgMobile[i]}')`);
+s.innerHTML=`<div class="cat-content"><h2>${c.toUpperCase()}</h2><p>${taglines[c]}</p><button class="cat-btn" onclick="jumpToCat('${c}')">EXPLORE COLLECTION</button></div>`;
+cont.appendChild(s);
+});
+let cart=[],deg=0,currCat=cats[0],items=[],rad=280;
+function init(){
+const fDiv=document.getElementById('filters');
+cats.forEach((c,i)=>{const b=document.createElement('button');b.className=`f-btn ${i===0?'active':''}`;b.innerText=c;b.onclick=()=>setCat(c,b);fDiv.appendChild(b)});
+setCat(cats[0],fDiv.children[0]);
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+}
+function jumpToCat(c){document.getElementById('collection').scrollIntoView({behavior:'smooth'});setTimeout(()=>{const btn=Array.from(document.querySelectorAll('.f-btn')).find(b=>b.innerText===c);if(btn)setCat(c,btn)},800)}
+function setCat(c,btn){document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currCat=c;items=db.filter(p=>p.cat===c);deg=0;render()}
+function render(){
+const c=document.getElementById('carousel');c.innerHTML='';const ang=360/items.length;
+items.forEach((p,i)=>{
+const el=document.createElement('div');
+const activeIdx=Math.abs(Math.round(deg/ang))%items.length;
+el.className=`plate ${i!==activeIdx?'blur':''}`;
+el.innerHTML=`<div class="p-img"><img src="${p.img}" alt="${p.name}"></div><div class="p-info"><h3>${p.name}</h3><div class="p-price"><span class="p-old">₹${p.old}</span> ₹${p.price}</div><button class="add-btn" onclick="add(${p.id})">ADD TO CART</button></div>`;
+el.style.transform=`rotateY(${i*ang}deg) translateZ(${rad}px)`;
+c.appendChild(el);
+});
+c.style.transform=`translateZ(-${rad}px) rotateY(${deg}deg)`;
+}
+function rot(d){deg+=d*(360/items.length);render()}
+function add(id){const p=db.find(x=>x.id===id);const ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({...p,qty:1});updC()}
+function updC(){
+const count = cart.reduce((a,b)=>a+b.qty,0);
+document.querySelectorAll('.cnt, #cnt').forEach(el => el.innerText = count);
+const box=document.getElementById('c-items');
+if(!cart.length){box.innerHTML='<p>Cart is empty</p>';return}
+let h='',tot=0;
+cart.forEach(i=>{tot+=i.price*i.qty;h+=`<div class="cart-item"><div>${i.name}<br><small>₹${i.price}</small></div><div style="display:flex;align-items:center;gap:10px"><button class="q-btn" onclick="mod(${i.id},-1)">-</button><span>${i.qty}</span><button class="q-btn" onclick="mod(${i.id},1)">+</button></div></div>`});
+h+=`<div style="text-align:right;margin-top:10px;font-weight:700">Total: ₹${tot}</div>`;
+box.innerHTML=h;
+}
+function mod(id,d){const i=cart.find(x=>x.id===id);if(i){i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.id!==id);updC()}}
+function tCart(){document.getElementById('cart-m').classList.add('active');updC()}
+function cCart(){document.getElementById('cart-m').classList.remove('active')}
+function chk(){alert('Order Placed!');cart=[];updC();cCart()}
+function tMenu(){document.getElementById('mobile-menu').classList.toggle('active')}
+let tx=0;
+document.getElementById('collection').addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+document.getElementById('collection').addEventListener('touchend',e=>{if(Math.abs(e.changedTouches[0].clientX-tx)>50)rot(e.changedTouches[0].clientX<tx?1:-1)});
+init();
+</script>
+</body>
+</html>

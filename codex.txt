@@ -3,7 +3,7 @@ Desktop Category Section Background Images:
 Evening Section Background:https://images.unsplash.com/photo-1765229277058-177cd0dead2c?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 Street Section Background:https://images.unsplash.com/photo-1728394604714-4d9036c26972?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG92ZXJzaXplZCUyMGhvb2RpZSUyMHN0cmVldCUyMHN0eWxlfGVufDB8MHwwfHx8MA%3D%3D
 Business Section Background:https://images.unsplash.com/photo-1481608726045-7407244fb7b6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Zm9ybWFsJTIwYnVzaW5lc3MlMjBhdHRpcmUlMjBwaG90b3Nob290fGVufDB8MHwwfHx8MA%3D%3D
-Vacation Section Background:https://images.unsplash.com/photo-1701358110109-5d5a6a8a6b0e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+Vacation Section Background:s 
 Festival Section Background:https://unsplash.com/photos/three-women-in-golden-gowns-stand-against-blue-wall-KyyeYZ2CJ04
 Traditional Section Background:https://images.pexels.com/photos/13661845/pexels-photo-13661845.jpeg
 Party Section Background:https://plus.unsplash.com/premium_photo-1745626565625-27ee9c7452d6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE3fHx8ZW58MHx8fHx8
